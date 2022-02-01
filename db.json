@@ -1,0 +1,157 @@
+{
+  "users": [
+    {
+      "id": 101,
+      "emailId": "ailla@nisum.com",
+      "password": "Anu@123",
+      "confirmPassword": "Anu@123",
+      "mobile": "9999999999",
+      "gender": "Female",
+      "userName": "Anusha",
+      "skills": [
+        "Breakfast recipes",
+        "Lunch recipes",
+        "Dinner recipes"
+      ],
+      "isRegisteredToMasterChef": false
+    },
+    {
+      "emailId": "ailla1@nisum.com",
+      "password": "Anu@1234",
+      "confirmPassword": "Anu@1234",
+      "mobile": "8888888888",
+      "gender": "Female",
+      "userName": "Anu",
+      "skills": [
+        "Dessert recipes",
+        "Main-course recipes"
+      ],
+      "id": 102,
+      "isRegisteredToMasterChef": false
+    },
+    {
+      "emailId": "nitya@gmail.com",
+      "password": "Nitya@123",
+      "confirmPassword": "Nitya@123",
+      "mobile": "7777777777",
+      "gender": "Female",
+      "userName": "Nitya",
+      "skills": [
+        "Salad recipes",
+        "Dessert recipes"
+      ],
+      "id": 103,
+      "isRegisteredToMasterChef": false
+    },
+    {
+      "emailId": "sakula@nisum.com",
+      "password": "Sindhu@123",
+      "confirmPassword": "Sindhu@123",
+      "mobile": "6378378273",
+      "gender": "Female",
+      "userName": "Sindhu",
+      "skills": [
+        "Main-course recipes",
+        "Breakfast recipes",
+        "Lunch recipes",
+        "Dinner recipes"
+      ],
+      "id": 104,
+      "isRegisteredToMasterChef": false
+    }
+  ],
+  "recipeTypes": [
+    {
+      "id": 201,
+      "title": "Breakfast",
+      "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      "image": "./../../assets/images/Baked.jpeg",
+      "isDeleted": false
+    },
+    {
+      "id": 202,
+      "title": "Lunch",
+      "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      "image": "./../../assets/images/Baked.jpeg",
+      "isDeleted": false
+    },
+    {
+      "id": 203,
+      "title": "Dinner",
+      "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      "image": "/img/Dinner.79a07ff7.jpeg",
+      "isDeleted": false
+    },
+    {
+      "id": 204,
+      "title": "Salad",
+      "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      "image": "/img/Salad.3add2374.jpeg",
+      "isDeleted": false
+    },
+    {
+      "id": 205,
+      "title": "Dessert",
+      "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      "image": "/img/Dessert.2bcca3e6.jpeg",
+      "isDeleted": false
+    },
+    {
+      "id": 206,
+      "title": "Main Course",
+      "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      "image": "/img/MainCourse.ca387415.jpeg",
+      "isDeleted": false
+    },
+    {
+      "id": 207,
+      "title": "Side Dish",
+      "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      "image": "/img/SideDish.5545ca8d.jpeg",
+      "isDeleted": false
+    },
+    {
+      "id": 208,
+      "title": "Baked",
+      "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      "image": "/img/Baked.0f9d66a9.jpeg",
+      "isDeleted": false
+    }
+  ],
+  "allRecipes": [
+    {
+      "id": 301,
+      "recipeName": "Idli",
+      "category": "Breakfast",
+      "origin": "India",
+      "description": "Idli is a natural fermentation process. It is prepared by steaming of fermented batter prepared from soaked rice and black gram dal.",
+      "ingredients": [
+        "rice flour",
+        "ground urad dal",
+        "salt",
+        "methi",
+        "water"
+      ],
+      "image": "./../../assets/images/recipes/idli.jpeg",
+      "isFavourite": true,
+      "isDeleted": false
+    },
+    {
+      "id": 302,
+      "recipeName": "Dosa",
+      "category": "Breakfast",
+      "origin": "India",
+      "description": "Dosa is a natural fermentation process. It is prepared by steaming of fermented batter prepared from soaked rice and black gram dal.",
+      "ingredients": [
+        "rice flour",
+        "ground urad dal",
+        "salt",
+        "methi",
+        "water"
+      ],
+      "image": "./../../assets/images/recipes/dosa.jpeg",
+      "isFavourite": false,
+      "isDeleted": false
+    }
+  ]
+}

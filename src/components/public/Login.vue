@@ -69,9 +69,7 @@ export default {
       }
     },
     methods :{
-        submitLoginForm(event){
-            console.log('in sub',event)
-            console.log('in form',this.userForm)
+        submitLoginForm(){
             this.errors = [];
             if(!this.userForm.emailId){
                 this.errors.push('Enter email id')
@@ -92,11 +90,9 @@ export default {
                         window.localStorage.setItem('userName',existUser.userName)
                         window.localStorage.setItem('password',existUser.password)
                         window.localStorage.setItem('registeredToMasterChef',existUser.isRegisteredToMasterChef)
-                        console.log('in existUser',existUser)
                         this.$router.push({path: '/home'});
                     }else{
                         this.$toast.error("Enter valid credentials");
-                        console.log('show error')
                     }
                 })
             }
@@ -110,7 +106,6 @@ export default {
             this.forgotPasswordModal = true;
         },
         sendMailforForgotPassword(){
-            console.log('forgotPasswordMailId',this.forgotPasswordMailId)
             this.forgotPasswordModal = false;
             this.$router.push({name:'reset-password'})
         },

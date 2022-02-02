@@ -41,7 +41,7 @@
         "Dessert recipes"
       ],
       "id": 103,
-      "isRegisteredToMasterChef": false
+      "isRegisteredToMasterChef": true
     },
     {
       "emailId": "sakula@nisum.com",
@@ -152,6 +152,32 @@
       "image": "./../../assets/images/recipes/dosa.jpeg",
       "isFavourite": false,
       "isDeleted": false
+    },
+    {
+      "recipeName": "Chapathi",
+      "category": "Breakfast",
+      "origin": "Indian",
+      "description": "Chapathi is good for health",
+      "ingredients": [
+        "Wheat Flour"
+      ],
+      "image": "./../../assets/images/recipes/dosa.jpeg",
+      "isFavourite": false,
+      "isDeleted": false,
+      "id": 303
+    },
+    {
+      "recipeName": "sdfsdf",
+      "category": "Breakfast",
+      "origin": "Indian",
+      "description": "sdfsdf",
+      "ingredients": [
+        "Water"
+      ],
+      "image": "./../../assets/images/recipes/dosa.jpeg",
+      "isFavourite": false,
+      "isDeleted": true,
+      "id": 304
     }
   ]
 }

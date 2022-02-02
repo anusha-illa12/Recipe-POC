@@ -26,30 +26,30 @@ export default {
         ],
     emits:['customeEventName'],
     beforeCreate(){
-        console.log('in beforeCreate')
+        // console.log('in beforeCreate')
     },
     created(){
-        console.log('in created')
+        // console.log('in created')
     },
     beforeMount(){
-        console.log('in beforeMount')
+        // console.log('in beforeMount')
     },
     mounted(){
-        console.log('search page')
+        // console.log('search page')
         this.getUserDetails()
     },
     beforeUpdate(){
-        console.log('in beforeUpdate')
-    },
-    beforeDestroy(){
-        console.log('in beforeDestroy')
-    },
-    destroyed(){
-        console.log('in destroyed')
+        // console.log('in beforeUpdate')
     },
     updated(){
-        console.log('updated')
+        // console.log('updated')
         // this.isRegisteredToMasterChef = window.localStorage.getItem('registeredToMasterChef');
+    },
+    beforeDestroy(){
+        // console.log('in beforeDestroy')
+    },
+    destroyed(){
+        // console.log('in destroyed')
     },
     methods:{
         registerToMasterChef(){
@@ -62,21 +62,7 @@ export default {
                 this.$toast.success("Registered successfully for MasterChef Competition!");
                 window.localStorage.setItem('registeredToMasterChef',res.data.isRegisteredToMasterChef);
                 this.isRegisteredToMasterChef = window.localStorage.getItem('registeredToMasterChef');
-                console.log('type',typeof(this.isRegisteredToMasterChef))
                 this.$emit('customeEventName',res.data)
-                //we can use mixins over here
-                // const usersList = users.data;
-                // const existUser = usersList.find(user => (user.emailId === this.userForm.emailId && user.password === this.userForm.password));
-                // if(existUser){
-                //     //store accesstoken
-                //     window.localStorage.setItem('emailId',existUser.emailId)
-                //     window.localStorage.setItem('userName',existUser.userName)
-                //     window.localStorage.setItem('registeredToMasterChef',existUser.isRegisteredToMasterChef)
-                //     console.log('in existUser',existUser)
-                //     this.$router.push({path: '/home'});
-                // }else{
-                //     console.log('show error')
-                // }
             })
         },
         getUserDetails(){

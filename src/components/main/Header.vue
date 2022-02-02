@@ -10,7 +10,7 @@
       <ul>
         
         <li class="active"><i class="fa fa-plus"></i><router-link to="/add-edit-recipe">Add Recipe</router-link></li>
-        <li><i class="fa fa-list"></i><router-link to="/all-recipes">All Recipes{{getRecipesCount}}</router-link></li>
+        <li><i class="fa fa-list"></i><router-link to="/all-recipes">All Recipes ({{getRecipesCount}})</router-link></li>
         <li><i class="fa fa-heart"></i><router-link to="/fav-recipes">Fav recipes</router-link></li>
         <li class="dropdown nav-item">
           <i class="fa fa-user"></i>
@@ -28,16 +28,27 @@
 </template>
 
 <script>
+import {mapActions,mapGetters} from 'vuex'
 export default {
   data(){
     return {
-      getRecipesCount:0
+      // getRecipesCount:0
     }
   },
-  mounted(){
-    this.getRecipesCount = this.$store.getters.getRecipesCount;
+  computed:{
+    ...mapGetters({getRecipesCount:"getRecipesCount"})
+    // getRecipesCount(){
+    //   return this.$store.getters.c;
+    // }
+  },
+  beforeMount(){
+    // this.$store.commit("setRecipesCount"); // need to call the mutation methods by using commit()
+    // this.$store.dispatch("setRecipesCount"); // need to call the action methods by using dispatch()
+    //instaed of above both ways we can call directly by using mapActions to call methods from actions of vuex,mapGetters to call methods from gettersof vuex
+    this.setRecipesCount();
   },
   methods:{
+    ...mapActions(['setRecipesCount']),
     signOut(){
       this.$confirm({
         // auth: true,

@@ -76,9 +76,7 @@ export default {
       }
     },
     methods :{
-        submitRegisterForm(event){
-            console.log('in sub',event)
-            console.log('in form',this.registerForm)
+        submitRegisterForm(){
             this.errors = [];
             if(this.registerForm.emailId && !this.validEmail(this.registerForm.emailId)){
                 //email validation check

@@ -7,9 +7,8 @@
                     <div class="search-item">
                         <img class="card-img-top" src="./../../assets/images/Baked.jpeg" alt="Card image cap" 
                         height="600" width="100">
-                        
                         <!-- {{type.image}} -->
-                        <!-- <img class="card-img-top" :src="getImage(type.image)" alt="Card image cap" height="600" width="100"> -->
+                        <!-- <img class="card-img-top" :src="type.image" alt="Card image cap" height="600" width="100"> -->
                         <div class="card-body">
                             <h5 class="card-title">{{type.title}}</h5>
                             <p class="card-text">{{type.description}}</p>
@@ -49,20 +48,17 @@ export default {
         Competition,SearchSlot
     },
     mounted(){
-        console.log('search page')
         this.getUserDetails()
         this.getRecipeTypes()
     },
     methods :{
         getImage(type) {
-            console.log(type);
             return  require(type);
             // var image = require.context(type.image, false, /\.*$/);
             // return image;
         },
         getRecipeTypes(){
             axios.get('http://localhost:3000/recipeTypes').then((res) =>{
-                console.log('res',res);
                 this.recipeTypes = res.data;
                 this.dataFetched = true;
             })
@@ -71,12 +67,11 @@ export default {
         getUserDetails(){
            if(window.localStorage.getItem('userName')){
                this.userName = window.localStorage.getItem('userName');
-               console.log('userName',this.userName)
            }
         },
         registeredToMasterChef(data){
             //getting data from child to parent
-            console.log('data',data)
+            console.log('output event emitted from child data',data)
             // this.renderMyComponent = false;
             // this.renderMyComponent = true;
             // this.$forceUpdate(); 

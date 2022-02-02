@@ -24,7 +24,7 @@
             </div>
             <div class="col-4 offset-4">
                 <label for="ingredients">Ingredients</label>
-                <v-select label="countryName" :options="countries" v-model="addEditForm.ingredients"></v-select>
+                <v-select label="ingredientName" :options="Ingredients" v-model="addEditForm.ingredients"></v-select>
             </div>
             <div class="col-4 offset-4"> 
                 <label for="description">Description</label>
@@ -110,6 +110,28 @@ export default {
                     countryName: "Australian"
                 }
             ],
+            Ingredients:[
+                {
+                    id:1,
+                    ingredientName: "Water" 
+                },
+                {
+                    id:2,
+                    ingredientName: "Rice Flour" 
+                },
+                {
+                    id:3,
+                    ingredientName: "Wheat Flour" 
+                },
+                {
+                    id:4,
+                    ingredientName: "Salt" 
+                },
+                {
+                    id:5,
+                    ingredientName: "Chilli Powder" 
+                }
+            ],
             showErrorBlock:false,
             isNew:true
         };
@@ -118,7 +140,6 @@ export default {
         // "vue-country-select": require("vue-country-select")
     },
     mounted(){
-        console.log('this.$router',this.$router)
         if(this.$router.history.current.params.id){
             this.isNew = false;
             this.getRecipeDetails(this.$router.history.current.params.id)
@@ -132,7 +153,25 @@ export default {
     },
     methods:{
         addRecipe(){
-            console.info('this.addEditForm',this.addEditForm)
+            console.info('this.addEditForm',this.addEditForm);
+            let data = {
+                recipeName : this.addEditForm.recipeName,
+                category: this.addEditForm.category.categoryName,
+                origin: this.addEditForm.origin.countryName,
+                description: this.addEditForm.description,
+                ingredients: [this.addEditForm.ingredients.ingredientName],
+                image: "./../../assets/images/recipes/dosa.jpeg",
+                isFavourite: false,
+                isDeleted: false
+            }
+            axios.post('http://localhost:3000/allRecipes',data).then((res)=>{
+                console.info('rec',res)
+                if(res.status === 201){
+                    this.$toast.success('Recipe Added successfully!')
+                    this.$store.dispatch("setRecipesCount"); // need to call the action methods by using dispatch()
+                    this.$router.push({name:'all-recipes'})
+                }
+            })
         },
         getRecipeDetails(id){
             axios.get('http://localhost:3000/allRecipes/'+id).then((res)=>{

@@ -5,18 +5,19 @@
             {{objtoParent}}
             {{arrtoParent}}
         </pre> -->
-        <p v-if="isRegisteredToMasterChef">Successfully registered for the Master Chef competition.</p>
+        <p v-if="getMasterChefStatus">Successfully registered for the Master Chef competition.</p>
         <p v-else>Are you intrested to participate in MasterChef competition!</p>
-        <button v-if="!isRegisteredToMasterChef" type="button" class="btn btn-success" @click="registerToMasterChef">Register Now</button>
+        <button v-if="!getMasterChefStatus" type="button" class="btn btn-success" @click="registerToMasterChef">Register Now</button>
     </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import {mapGetters} from 'vuex'
 export default {
     data() {
         return{
-            isRegisteredToMasterChef:false,
+            // isRegisteredToMasterChef:false,
             userDetails:{},
             name:''
         }
@@ -55,6 +56,9 @@ export default {
     destroyed(){
         // console.log('in destroyed')
     },
+    computed:{
+        ...mapGetters({getMasterChefStatus:"getMasterChefStatus"}),
+    },
     methods:{
         registerToMasterChef(){
             console.log('in registerToMasterChef')
@@ -67,7 +71,7 @@ export default {
                 this.$toast.success("Registered successfully for MasterChef Competition!");
                 // this.$store.userDetails = res.data;
                 window.localStorage.setItem('userDetails',JSON.stringify(this.userDetails));
-                this.isRegisteredToMasterChef = this.userDetails.isRegisteredToMasterChef;
+                // this.isRegisteredToMasterChef = this.userDetails.isRegisteredToMasterChef;
                 this.$store.dispatch("setMasterChefStatus");
                 // this.isRegisteredToMasterChef = window.localStorage.getItem('registeredToMasterChef');
                 // this.isRegisteredToMasterChef = this.$store.userDetails.isRegisteredToMasterChef;
@@ -76,7 +80,7 @@ export default {
         },
         getUserDetails(){
             this.name = this.userDetails.userName;
-            this.isRegisteredToMasterChef = this.userDetails.isRegisteredToMasterChef;
+            // this.isRegisteredToMasterChef = this.userDetails.isRegisteredToMasterChef;
         }
     }
 }

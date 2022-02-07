@@ -73,6 +73,21 @@
       ],
       "id": 105,
       "isRegisteredToMasterChef": false
+    },
+    {
+      "emailId": "demo@gmail.com",
+      "password": "Demo@123",
+      "confirmPassword": "Demo@123",
+      "mobile": "3434343434",
+      "gender": "Female",
+      "userName": "demo user",
+      "skills": [
+        "Breakfast recipes",
+        "Lunch recipes",
+        "Dinner recipes"
+      ],
+      "id": 106,
+      "isRegisteredToMasterChef": true
     }
   ],
   "recipeTypes": [
@@ -212,8 +227,8 @@
     {
       "recipeName": "Biryani",
       "category": {
-        "id": 6,
-        "categoryName": "Main Course"
+        "id": 2,
+        "categoryName": "Lunch"
       },
       "origin": {
         "countryCode": "In",
@@ -228,15 +243,36 @@
         {
           "id": 3,
           "ingredientName": "Wheat Flour"
-        },
-        {
-          "id": 4,
-          "ingredientName": "Salt"
         }
       ],
       "isFavourite": true,
       "isDeleted": false,
       "id": 305
+    },
+    {
+      "recipeName": "test",
+      "category": {
+        "id": 2,
+        "categoryName": "Lunch"
+      },
+      "origin": {
+        "countryCode": "Ch",
+        "countryName": "Chinese"
+      },
+      "description": "Testing",
+      "ingredients": [
+        {
+          "id": 2,
+          "ingredientName": "Rice Flour"
+        },
+        {
+          "id": 3,
+          "ingredientName": "Wheat Flour"
+        }
+      ],
+      "isFavourite": false,
+      "isDeleted": true,
+      "id": 306
     }
   ]
 }

@@ -117,23 +117,26 @@ export default {
                 this.errors.push('MobileLength') 
             }
 
-            let registeredUser = {
-                emailId: this.registerForm.emailId,
-                password: this.registerForm.password,
-                confirmPassword: this.registerForm.confirmPassword,
-                mobile: this.registerForm.mobile,
-                gender: this.registerForm.gender,
-                userName: this.registerForm.userName,
-                skills : this.registerForm.skills
-            }
-            console.info('registeredUser',registeredUser)
-            axios.post('http://localhost:3000/users',registeredUser).then((res) =>{
-                console.info('res',res)
-                if(res.status === 201){
-                    this.$toast.success("Registered successfully!");
-                    this.loginPage();
+            if(!this.errors.length){
+                let registeredUser = {
+                    emailId: this.registerForm.emailId,
+                    password: this.registerForm.password,
+                    confirmPassword: this.registerForm.confirmPassword,
+                    mobile: this.registerForm.mobile,
+                    gender: this.registerForm.gender,
+                    userName: this.registerForm.userName,
+                    skills : this.registerForm.skills
                 }
-            })
+                console.info('registeredUser',registeredUser)
+                axios.post('http://localhost:3000/users',registeredUser).then((res) =>{
+                    console.info('res',res)
+                    if(res.status === 201){
+                        this.$toast.success("Registered successfully!");
+                        this.loginPage();
+                    }
+                })
+            }
+           
         },
         validEmail: function (email) {
             let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

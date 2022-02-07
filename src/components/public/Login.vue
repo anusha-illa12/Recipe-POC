@@ -100,6 +100,8 @@ export default {
                         }else{
                           window.localStorage.clear();
                         }
+                        window.localStorage.setItem('userDetails',JSON.stringify(existUser))
+                        this.$router.push({path: '/home'});
                         // else{
                           // window.localStorage.clear();
                           // window.localStorage.setItem('userDetails',JSON.stringify(existUser))
@@ -107,13 +109,11 @@ export default {
                         // }
                         // this.$store.dispatch("setUserDetails",existUser); // need to call the action methods by using dispatch()
                         // this.$store.userDetails = existUser;
-                        window.localStorage.setItem('userDetails',JSON.stringify(existUser))
                         // window.localStorage.setItem('rememberMe',this.userForm.checked)
                         // window.localStorage.setItem('emailId',existUser.emailId)
                         // window.localStorage.setItem('userName',existUser.userName)
                         // window.localStorage.setItem('password',existUser.password)
                         // window.localStorage.setItem('registeredToMasterChef',existUser.isRegisteredToMasterChef)
-                        this.$router.push({path: '/home'});
                     }else{
                         this.$toast.error("Enter valid credentials");
                     }
@@ -129,12 +129,24 @@ export default {
             this.forgotPasswordModal = true;
         },
         sendMailforForgotPassword(){
-            this.forgotPasswordModal = false;
-            this.$router.push({name:'reset-password'})
+            if(this.forgotPasswordMailId){
+              if(!this.validEmail(this.forgotPasswordMailId)){
+                this.$toast.warning('Enter Valid Email id')
+              }else{
+                this.forgotPasswordModal = false;
+                this.$router.push({name:'reset-password'})
+              }
+            }else{
+              this.$toast.warning('Enter Email id')
+            }
         },
         closeModal(){
             this.forgotPasswordModal = false;
-        }
+        },
+        validEmail: function (email) {
+            let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        },
     }
 }
 </script>

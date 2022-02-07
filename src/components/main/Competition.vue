@@ -5,9 +5,9 @@
             {{objtoParent}}
             {{arrtoParent}}
         </pre> -->
-        <p v-if="isRegisteredToMasterChef == 'true'">Successfully registered for the Master Chef competition.</p>
+        <p v-if="isRegisteredToMasterChef">Successfully registered for the Master Chef competition.</p>
         <p v-else>Are you intrested to participate in MasterChef competition!</p>
-        <button v-if="isRegisteredToMasterChef != 'true'" type="button" class="btn btn-success" @click="registerToMasterChef">Register Now</button>
+        <button v-if="!isRegisteredToMasterChef" type="button" class="btn btn-success" @click="registerToMasterChef">Register Now</button>
     </div>
 </template>
 
@@ -16,15 +16,16 @@ import axios from 'axios'
 export default {
     data() {
         return{
-            isRegisteredToMasterChef:'',
-            userDetails:{}
+            isRegisteredToMasterChef:false,
+            userDetails:{},
+            name:''
         }
     },
-    props:[
-        'name',
+    // props:[
+        // 'name',
         // 'objtoParent','arrtoParent'
-        ],
-    emits:['customeEventName'],
+        // ],
+    // emits:['customeEventName'],
     beforeCreate(){
         // console.log('in beforeCreate')
     },
@@ -36,6 +37,9 @@ export default {
     },
     mounted(){
         // console.log('search page')
+         if(window.localStorage.getItem('userDetails')){
+            this.userDetails = JSON.parse(window.localStorage.getItem('userDetails'));
+         }
         this.getUserDetails()
     },
     beforeUpdate(){
@@ -54,21 +58,25 @@ export default {
     methods:{
         registerToMasterChef(){
             console.log('in registerToMasterChef')
-            this.userDetails = JSON.parse(window.localStorage.getItem('userDetails'));
+            // this.userDetails = this.$store.userDetails;
+            // this.userDetails = window.localStorage.getItem('userDetails');
             this.userDetails.isRegisteredToMasterChef = true;
             console.info('userDetails',this.userDetails)
             axios.put('http://localhost:3000/users/'+this.userDetails.id,this.userDetails).then((res) =>{
                 console.info('res',res)
                 this.$toast.success("Registered successfully for MasterChef Competition!");
-                window.localStorage.setItem('registeredToMasterChef',res.data.isRegisteredToMasterChef);
-                this.isRegisteredToMasterChef = window.localStorage.getItem('registeredToMasterChef');
-                this.$emit('customeEventName',res.data)
+                // this.$store.userDetails = res.data;
+                window.localStorage.setItem('userDetails',JSON.stringify(this.userDetails));
+                this.isRegisteredToMasterChef = this.userDetails.isRegisteredToMasterChef;
+                this.$store.dispatch("setMasterChefStatus");
+                // this.isRegisteredToMasterChef = window.localStorage.getItem('registeredToMasterChef');
+                // this.isRegisteredToMasterChef = this.$store.userDetails.isRegisteredToMasterChef;
+                // this.$emit('customeEventName',res.data)
             })
         },
         getUserDetails(){
-           if(window.localStorage.getItem('registeredToMasterChef')){
-               this.isRegisteredToMasterChef = window.localStorage.getItem('registeredToMasterChef');
-           }
+            this.name = this.userDetails.userName;
+            this.isRegisteredToMasterChef = this.userDetails.isRegisteredToMasterChef;
         }
     }
 }

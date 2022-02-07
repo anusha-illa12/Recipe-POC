@@ -20,7 +20,8 @@
         <!-- v-if="renderMyComponent" -->
         <!-- We can use the below reusable component at different places or multiple times at same place by using v-for -->
         <!-- <Competition name="Anu" :objtoParent="objtoParent.name" :arrtoParent="arrtoParent"></Competition> -->
-        <Competition :name=userName @customeEventName="registeredToMasterChef"></Competition>
+        <!-- :name=userName @customeEventName="registeredToMasterChef" -->
+        <Competition></Competition>
     </div>
 </template>
 
@@ -34,7 +35,7 @@ export default {
     data() {
         return {
             recipeTypes:[],
-            userName:'',
+            // userName:'',
             dataFetched: false,
             // objtoParent:{
             //     name:'test',
@@ -48,7 +49,7 @@ export default {
         Competition,SearchSlot
     },
     mounted(){
-        this.getUserDetails()
+        // this.getUserDetails()
         this.getRecipeTypes()
     },
     methods :{
@@ -64,18 +65,20 @@ export default {
             })
             // this.recipeTypes = db.recipeTypes;
         },
-        getUserDetails(){
-           if(window.localStorage.getItem('userName')){
-               this.userName = window.localStorage.getItem('userName');
-           }
-        },
-        registeredToMasterChef(data){
-            //getting data from child to parent
-            console.log('output event emitted from child data',data)
-            // this.renderMyComponent = false;
-            // this.renderMyComponent = true;
-            // this.$forceUpdate(); 
-        }
+        // getUserDetails(){
+            // this.userName = this.$store.userDetails.userName;
+        //    if(window.localStorage.getItem('userDetails')){
+        //        const userDetails = JSON.parse(window.localStorage.getItem('userDetails'));
+        //        this.userName = userDetails.userName;
+        //    }
+        // },
+        // registeredToMasterChef(data){
+        //     //getting data from child to parent
+        //     console.log('output event emitted from child data',data)
+        //     // this.renderMyComponent = false;
+        //     // this.renderMyComponent = true;
+        //     // this.$forceUpdate(); 
+        // }
     }
 
 }

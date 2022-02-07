@@ -9,6 +9,7 @@
         <div class="userFields col-4 offset-4"> 
             <label for="emailId">Email ID</label>
             <input type="text" id="emailId" placeholder="Enter Email ID" v-model="userForm.emailId">
+            <!-- show error for individual field in red color -->
             <!-- required -->
         </div>
         <div class="userFields col-4 offset-4">
@@ -68,6 +69,13 @@ export default {
         forgotPasswordModal : false
       }
     },
+    mounted(){
+      if(window.localStorage.getItem('rememberMe')){
+        this.userForm.emailId = window.localStorage.getItem('emailId');
+        this.userForm.password = window.localStorage.getItem('password');
+        this.userForm.checked = window.localStorage.getItem('rememberMe')
+      }
+    },
     methods :{
         submitLoginForm(){
             this.errors = [];
@@ -85,11 +93,26 @@ export default {
                     const usersList = users.data;
                     const existUser = usersList.find(user => (user.emailId === this.userForm.emailId && user.password === this.userForm.password));
                     if(existUser){
+                        if(this.userForm.checked){
+                          window.localStorage.setItem('rememberMe',this.userForm.checked)
+                          window.localStorage.setItem('emailId',existUser.emailId)
+                          window.localStorage.setItem('password',existUser.password)
+                        }else{
+                          window.localStorage.clear();
+                        }
+                        // else{
+                          // window.localStorage.clear();
+                          // window.localStorage.setItem('userDetails',JSON.stringify(existUser))
+                          // window.localStorage.setItem('registeredToMasterChef',existUser.isRegisteredToMasterChef)
+                        // }
+                        // this.$store.dispatch("setUserDetails",existUser); // need to call the action methods by using dispatch()
+                        // this.$store.userDetails = existUser;
                         window.localStorage.setItem('userDetails',JSON.stringify(existUser))
-                        window.localStorage.setItem('emailId',existUser.emailId)
-                        window.localStorage.setItem('userName',existUser.userName)
-                        window.localStorage.setItem('password',existUser.password)
-                        window.localStorage.setItem('registeredToMasterChef',existUser.isRegisteredToMasterChef)
+                        // window.localStorage.setItem('rememberMe',this.userForm.checked)
+                        // window.localStorage.setItem('emailId',existUser.emailId)
+                        // window.localStorage.setItem('userName',existUser.userName)
+                        // window.localStorage.setItem('password',existUser.password)
+                        // window.localStorage.setItem('registeredToMasterChef',existUser.isRegisteredToMasterChef)
                         this.$router.push({path: '/home'});
                     }else{
                         this.$toast.error("Enter valid credentials");

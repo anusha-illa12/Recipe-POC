@@ -6,7 +6,7 @@
             <b>Please correct the following error(s):</b>
             <p v-for="error in errors" :key="error">{{ error }}</p>
         </div>
-        <form autocomplete="off" class="container" @submit.prevent="addRecipe"> 
+        <form autocomplete="off" class="container"> 
             <div class="col-4 offset-4"> 
                 <label for="recipeName">Recipe Name</label>
                 <input type="text" id="recipeName" placeholder="Enter Recipe Name" v-model="addEditForm.recipeName" required>
@@ -24,14 +24,14 @@
             </div>
             <div class="col-4 offset-4">
                 <label for="ingredients">Ingredients</label>
-                <v-select label="ingredientName" :options="Ingredients" v-model="addEditForm.ingredients"></v-select>
+                <v-select label="ingredientName" :multiple=true :options="Ingredients" v-model="addEditForm.ingredients"></v-select>
             </div>
             <div class="col-4 offset-4"> 
                 <label for="description">Description</label>
                 <textarea name="description" id="description"  v-model="addEditForm.description" placeholder="Enter description" cols="30" rows="10" required></textarea>
             </div>
-            <button type="submit" class="btn btn-success" v-if="isNew">Add Recipe</button>
-            <button type="submit" class="btn btn-success" v-else>Update Recipe</button>
+            <button type="button" class="btn btn-success" v-if="isNew" @click.prevent="addOrUpdateRecipe('add')">Add Recipe</button>
+            <button type="button" class="btn btn-success" v-else @click.prevent="addOrUpdateRecipe('edit')">Update Recipe</button>
         </form>
     </div>
 </template>
@@ -48,7 +48,8 @@ export default {
                 origin:'',
                 description:'',
                 ingredients:[],
-                image:''
+                image:'',
+                isFavourite : false
             },
             categories:[
                 {
@@ -133,15 +134,17 @@ export default {
                 }
             ],
             showErrorBlock:false,
-            isNew:true
+            isNew:true,
+            recipeId:''
         };
     },
-    components :{
-        // "vue-country-select": require("vue-country-select")
+    beforeCreate(){
+        console.info('in defore created')
     },
     mounted(){
         if(this.$router.history.current.params.id){
             this.isNew = false;
+            this.recipeId = this.$router.history.current.params.id;
             this.getRecipeDetails(this.$router.history.current.params.id)
         }else{
             this.isNew = true;
@@ -152,26 +155,35 @@ export default {
         console.info('in up')
     },
     methods:{
-        addRecipe(){
-            console.info('this.addEditForm',this.addEditForm);
+        addOrUpdateRecipe(action){
+            console.info('this.addEditForm',this.addEditForm,action);
             let data = {
                 recipeName : this.addEditForm.recipeName,
-                category: this.addEditForm.category.categoryName,
-                origin: this.addEditForm.origin.countryName,
+                category: this.addEditForm.category,
+                origin: this.addEditForm.origin,
                 description: this.addEditForm.description,
-                ingredients: [this.addEditForm.ingredients.ingredientName],
-                image: "./../../assets/images/recipes/dosa.jpeg",
-                isFavourite: false,
+                ingredients: this.addEditForm.ingredients,
+                isFavourite: this.addEditForm.isFavourite,
                 isDeleted: false
             }
-            axios.post('http://localhost:3000/allRecipes',data).then((res)=>{
-                console.info('rec',res)
-                if(res.status === 201){
-                    this.$toast.success('Recipe Added successfully!')
-                    this.$store.dispatch("setRecipesCount"); // need to call the action methods by using dispatch()
-                    this.$router.push({name:'all-recipes'})
-                }
-            })
+            console.info('data',data)
+            if(action === 'add'){
+                axios.post("http://localhost:3000/allRecipes",data).then((res)=>{
+                    if(res.status === 201){
+                        this.$store.dispatch("setRecipesCount"); // need to call the action methods by using dispatch()
+                        this.$toast.success('Recipe Added successfully!')
+                        this.$router.push({name:'all-recipes'})
+                    }
+                })
+            }else{
+                axios.put("http://localhost:3000/allRecipes/"+this.recipeId,data).then((res)=>{
+                    if(res.status === 200){
+                        this.$store.dispatch("setRecipesCount"); // need to call the action methods by using dispatch()
+                        this.$toast.success('Recipe Updated successfully!')
+                        this.$router.push({name:'all-recipes'})
+                    }
+                })
+            }
         },
         getRecipeDetails(id){
             axios.get('http://localhost:3000/allRecipes/'+id).then((res)=>{
@@ -181,6 +193,9 @@ export default {
                 }
             })
         }
+    },
+    watch:{
+
     }
 }
 </script>

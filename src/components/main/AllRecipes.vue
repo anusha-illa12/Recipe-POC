@@ -12,8 +12,8 @@
             <tbody>
                 <tr v-for="recipe in allRecipes" :key="recipe.id">
                 <th scope="row">{{recipe.recipeName}}</th>
-                <td>{{recipe.category}}</td>
-                <td>{{recipe.origin}}</td>
+                <td>{{recipe.category.categoryName}}</td>
+                <td>{{recipe.origin.countryName}}</td>
                 <td>
                     <i v-if="recipe.isFavourite" class="fa fa-heart mr-2" style="color:red" @click="doFavourite(recipe)"></i>
                     <i v-else class="fa fa-heart mr-2" @click="doFavourite(recipe)"></i>
@@ -26,14 +26,14 @@
                 </tr>
             </tbody>
         </table>
-        <!-- <Competition></Competition> -->
+        <Competition></Competition>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
 import recipeActionsMixin from './../../mixins/recipeActions';
-// import Competition from './Competition.vue';
+import Competition from './Competition.vue';
 
 export default {
     data() {
@@ -43,7 +43,7 @@ export default {
     },
     mixins:[recipeActionsMixin],
     components:{
-        // Competition
+        Competition
     },
     mounted(){
         this.getRecipes() //reusable name as using mixins for fav recipes as well

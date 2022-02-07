@@ -17,7 +17,7 @@ import { store } from './store/index';
 
 import Login from './components/public/Login.vue'
 import PageNotFound from './components/public/PageNotFound.vue'
-import AddEditRecipe from './components/main/AddEditRecipe.vue';
+// import AddEditRecipe from './components/main/AddEditRecipe.vue';
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
@@ -34,12 +34,14 @@ Vue.use(Vuex)
 const routes = [
   // { path : '', component: Login},
   // {path: '/', redirect: '/Login'}
-  { path : '/login',name:'login', component: Login, alias: "/"} ,
-  { path: '/register', name:'register',component:() => import(/* webpackChunkName: "Register" */ './components/public/Register.vue') },
-  { path: '/reset-password', name:'reset-password',component:() => import(/* webpackChunkName: "Reset Password" */ './components/public/ResetPassword.vue') },
+  { path : '/login',name:'login', component: Login, alias: "/",meta:{requiresAuth:false}} ,
+  { path: '/register', name:'register',component:() => import(/* webpackChunkName: "Register" */ './components/public/Register.vue'),meta:{requiresAuth:false} },
+  { path: '/reset-password', name:'reset-password',component:() => import(/* webpackChunkName: "Reset Password" */ './components/public/ResetPassword.vue'),meta:{requiresAuth:false} },
   { path: '/home', 
     name:'home',
     component:() => import(/* webpackChunkName: "Home" */ './components/main/Home.vue'),
+    alias:'',
+    meta:{requiresAuth:true},
     children:[
       // {
       //   path:'',
@@ -50,43 +52,74 @@ const routes = [
         path : '/search',
         name: 'search',
         component:() => import(/* webpackChunkName: "Search" */ './components/main/Search.vue'),
-        alias : ''
+        alias : '',
+        meta:{requiresAuth:true}
       },
       {
         path : '/all-recipes',
         name: 'all-recipes',
-        component:() => import(/* webpackChunkName: "List" */ './components/main/AllRecipes.vue')
+        component:() => import(/* webpackChunkName: "List" */ './components/main/AllRecipes.vue'),
+        meta:{requiresAuth:true}
       },
       {
         path : '/add-edit-recipe',
-        name: 'add-edit-recipe',
-        component: AddEditRecipe
-        // component:() => import(/* webpackChunkName: "Add/edit" */ './components/main/AddEditRecipe.vue')
+        name: 'add-recipe',
+        // component: AddEditRecipe
+        component:() => import(/* webpackChunkName: "Add/edit" */ './components/main/AddEditRecipe.vue'),
+        meta:{requiresAuth:true}
       },
       {
         path : '/add-edit-recipe/:id',
-        name: 'add-edit-recipe',
-        component: AddEditRecipe
-        // component:() => import(/* webpackChunkName: "Add/edit" */ './components/main/AddEditRecipe.vue')
+        name: 'edit-recipe',
+        // component: AddEditRecipe
+        component:() => import(/* webpackChunkName: "Add/edit" */ './components/main/AddEditRecipe.vue'),
+        meta:{requiresAuth:true}
       },
       {
         path : '/fav-recipes',
         name: 'favourite',
-        component:() => import(/* webpackChunkName: "Favourites" */ './components/main/FavRecipes.vue')
+        component:() => import(/* webpackChunkName: "Favourites" */ './components/main/FavRecipes.vue'),
+        meta:{requiresAuth:true}
       },
       {
         path : '/profile',
         name: 'profile',
-        component:() => import(/* webpackChunkName: "Profile" */ './components/main/Profile.vue')
-      }
+        component:() => import(/* webpackChunkName: "Profile" */ './components/main/Profile.vue'),
+        meta:{requiresAuth:true}
+      },
+      {
+        path : '/more-about-masterchef',
+        name: 'more-about-masterchef',
+        component:() => import(/* webpackChunkName: "About Master Chef" */ './components/main/AboutMasterChef.vue'),
+        meta:{requiresAuth:true}
+      },
     ],
-    alias:''
   },
   { path: '/:notFound(.*)', component: PageNotFound}
  ]
  const router = new VueRouter({
   routes
  })
+
+router.beforeEach((to, from, next) => {
+  if(to.meta.requiresAuth){
+    if(!window.localStorage.getItem('userDetails')){ //loal storage contains user name then do not redirect to public pages
+      next({
+        name:"login"
+      });
+    }else{
+      next();
+    }
+  }else{
+    if(!window.localStorage.getItem('userDetails')){
+      next();
+    }else{
+      next({
+        name:"home"
+      });
+    }
+  }
+})
  
 new Vue({
   router,

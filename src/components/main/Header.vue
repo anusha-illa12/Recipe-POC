@@ -8,10 +8,10 @@
     </div>
     <nav class="main-nav">
       <ul>
-        
+        <li class="active" v-if="getMasterChefStatus"><i class="fa fa-cutlery"></i><router-link to="/more-about-masterchef">More about Master Chef</router-link></li>
         <li class="active"><i class="fa fa-plus"></i><router-link to="/add-edit-recipe">Add Recipe</router-link></li>
         <li><i class="fa fa-list"></i><router-link to="/all-recipes">All Recipes ({{getRecipesCount}})</router-link></li>
-        <li><i class="fa fa-heart"></i><router-link to="/fav-recipes">Fav recipes</router-link></li>
+        <li><i class="fa fa-heart"></i><router-link to="/fav-recipes">Fav recipes ({{getFavRecipesCount}})</router-link></li>
         <li class="dropdown nav-item">
           <i class="fa fa-user"></i>
           <a class="" title="Profile" href="javascript:;" data-toggle="dropdown">Profile</a>
@@ -31,24 +31,27 @@
 import {mapActions,mapGetters} from 'vuex'
 export default {
   data(){
-    return {
-      // getRecipesCount:0
-    }
+    return {}
   },
   computed:{
-    ...mapGetters({getRecipesCount:"getRecipesCount"})
-    // getRecipesCount(){
-    //   return this.$store.getters.c;
-    // }
+    ...mapGetters({getRecipesCount:"getRecipesCount",getFavRecipesCount:"getFavRecipesCount",getMasterChefStatus:"getMasterChefStatus"}),
   },
   beforeMount(){
     // this.$store.commit("setRecipesCount"); // need to call the mutation methods by using commit()
     // this.$store.dispatch("setRecipesCount"); // need to call the action methods by using dispatch()
     //instaed of above both ways we can call directly by using mapActions to call methods from actions of vuex,mapGetters to call methods from gettersof vuex
     this.setRecipesCount();
+    this.setFavRecipesCount();
+    this.setMasterChefStatus();
+    if(window.localStorage.getItem('userDetails')){
+      this.userDetails = JSON.parse(window.localStorage.getItem('userDetails'));
+    }
+  },
+  mounted(){
+     
   },
   methods:{
-    ...mapActions(['setRecipesCount']),
+    ...mapActions(['setRecipesCount','setFavRecipesCount','setMasterChefStatus']),
     signOut(){
       this.$confirm({
         // auth: true,
@@ -65,7 +68,13 @@ export default {
         callback: (confirm) => {
           // if (confirm && password == window.localStorage.getItem('password')) {
             if(confirm){
-              window.localStorage.clear();
+              if(window.localStorage.getItem('rememberMe')){
+                window.localStorage.removeItem('userDetails')
+              }else{
+                window.localStorage.clear();
+              }
+              // this.$store.dispatch("setUserDetails",{}); // need to call the action methods by using dispatch()
+              // this.$store.userDetails = null;
               this.$router.push({ name: 'login' })
             }
           // }else{

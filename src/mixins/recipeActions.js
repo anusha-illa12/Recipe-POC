@@ -10,6 +10,8 @@ export default{
                     this.$toast.success("Added to Favourites successfully!");
                 else
                     this.$toast.success("Removed from Favourites successfully!");
+
+                this.$store.dispatch("setFavRecipesCount"); // need to call the action methods by using dispatch()
                 this.getRecipes();
             })
         },

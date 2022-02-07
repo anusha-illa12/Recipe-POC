@@ -41,7 +41,7 @@
         "Dessert recipes"
       ],
       "id": 103,
-      "isRegisteredToMasterChef": true
+      "isRegisteredToMasterChef": false
     },
     {
       "emailId": "sakula@nisum.com",
@@ -57,6 +57,21 @@
         "Dinner recipes"
       ],
       "id": 104,
+      "isRegisteredToMasterChef": false
+    },
+    {
+      "emailId": "manu@gmail.com",
+      "password": "Manu@123",
+      "confirmPassword": "Manu@123",
+      "mobile": "5656565656",
+      "gender": "Female",
+      "userName": "Manu",
+      "skills": [
+        "Breakfast recipes",
+        "Lunch recipes",
+        "Dinner recipes"
+      ],
+      "id": 105,
       "isRegisteredToMasterChef": false
     }
   ],
@@ -120,64 +135,108 @@
   ],
   "allRecipes": [
     {
-      "id": 301,
       "recipeName": "Idli",
-      "category": "Breakfast",
-      "origin": "India",
+      "category": {
+        "id": 1,
+        "categoryName": "Breakfast"
+      },
+      "origin": {
+        "countryCode": "In",
+        "countryName": "Indian"
+      },
       "description": "Idli is a natural fermentation process. It is prepared by steaming of fermented batter prepared from soaked rice and black gram dal.",
       "ingredients": [
-        "rice flour",
-        "ground urad dal",
-        "salt",
-        "methi",
-        "water"
+        {
+          "id": 2,
+          "ingredientName": "Rice Flour"
+        },
+        {
+          "id": 3,
+          "ingredientName": "Wheat Flour"
+        }
       ],
-      "image": "./../../assets/images/recipes/idli.jpeg",
-      "isFavourite": true,
-      "isDeleted": false
+      "isFavourite": false,
+      "isDeleted": false,
+      "id": 301
     },
     {
-      "id": 302,
       "recipeName": "Dosa",
-      "category": "Breakfast",
-      "origin": "India",
+      "category": {
+        "id": 1,
+        "categoryName": "Breakfast"
+      },
+      "origin": {
+        "countryCode": "In",
+        "countryName": "Indian"
+      },
       "description": "Dosa is a natural fermentation process. It is prepared by steaming of fermented batter prepared from soaked rice and black gram dal.",
       "ingredients": [
-        "rice flour",
-        "ground urad dal",
-        "salt",
-        "methi",
-        "water"
+        {
+          "id": 2,
+          "ingredientName": "Rice Flour"
+        },
+        {
+          "id": 3,
+          "ingredientName": "Wheat Flour"
+        }
       ],
-      "image": "./../../assets/images/recipes/dosa.jpeg",
       "isFavourite": false,
-      "isDeleted": false
+      "isDeleted": false,
+      "id": 302
     },
     {
       "recipeName": "Chapathi",
-      "category": "Breakfast",
-      "origin": "Indian",
+      "category": {
+        "id": 1,
+        "categoryName": "Breakfast"
+      },
+      "origin": {
+        "countryCode": "In",
+        "countryName": "Indian"
+      },
       "description": "Chapathi is good for health",
       "ingredients": [
-        "Wheat Flour"
+        {
+          "id": 2,
+          "ingredientName": "Rice Flour"
+        },
+        {
+          "id": 3,
+          "ingredientName": "Wheat Flour"
+        }
       ],
-      "image": "./../../assets/images/recipes/dosa.jpeg",
-      "isFavourite": false,
+      "isFavourite": true,
       "isDeleted": false,
       "id": 303
     },
     {
-      "recipeName": "sdfsdf",
-      "category": "Breakfast",
-      "origin": "Indian",
-      "description": "sdfsdf",
+      "recipeName": "Biryani",
+      "category": {
+        "id": 6,
+        "categoryName": "Main Course"
+      },
+      "origin": {
+        "countryCode": "In",
+        "countryName": "Indian"
+      },
+      "description": "One of the famous dish in India",
       "ingredients": [
-        "Water"
+        {
+          "id": 2,
+          "ingredientName": "Rice Flour"
+        },
+        {
+          "id": 3,
+          "ingredientName": "Wheat Flour"
+        },
+        {
+          "id": 4,
+          "ingredientName": "Salt"
+        }
       ],
-      "image": "./../../assets/images/recipes/dosa.jpeg",
-      "isFavourite": false,
-      "isDeleted": true,
-      "id": 304
+      "isFavourite": true,
+      "isDeleted": false,
+      "id": 305
     }
   ]
 }

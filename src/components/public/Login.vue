@@ -101,6 +101,7 @@ export default {
                           window.localStorage.clear();
                         }
                         window.localStorage.setItem('userDetails',JSON.stringify(existUser))
+                        window.localStorage.setItem('registeredToMasterChef',existUser.isRegisteredToMasterChef)
                         this.$router.push({path: '/home'});
                         // else{
                           // window.localStorage.clear();

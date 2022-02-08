@@ -108,7 +108,17 @@ router.beforeEach((to, from, next) => {
         name:"login"
       });
     }else{
-      next();
+      if(to.path === '/more-about-masterchef'){
+        if(window.localStorage.getItem('registeredToMasterChef') == "true"){
+          next();
+        }else{
+          next({
+            name:"home"
+          });
+        }
+      }else{
+        next();
+      }
     }
   }else{
     if(!window.localStorage.getItem('userDetails')){

@@ -71,6 +71,7 @@ export default {
                 this.$toast.success("Registered successfully for MasterChef Competition!");
                 // this.$store.userDetails = res.data;
                 window.localStorage.setItem('userDetails',JSON.stringify(this.userDetails));
+                window.localStorage.setItem('registeredToMasterChef',this.userDetails.isRegisteredToMasterChef)
                 // this.isRegisteredToMasterChef = this.userDetails.isRegisteredToMasterChef;
                 this.$store.dispatch("setMasterChefStatus");
                 // this.isRegisteredToMasterChef = window.localStorage.getItem('registeredToMasterChef');

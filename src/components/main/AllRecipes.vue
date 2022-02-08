@@ -15,8 +15,9 @@
                 <td>{{recipe.category.categoryName}}</td>
                 <td>{{recipe.origin.countryName}}</td>
                 <td>
-                    <i v-if="recipe.isFavourite" class="fa fa-heart mr-2" style="color:red" @click="doFavourite(recipe)"></i>
-                    <i v-else class="fa fa-heart mr-2" @click="doFavourite(recipe)"></i>
+                    <i :class="recipe.isFavourite? 'fa fa-heart mr-2 icon-color' : 'fa fa-heart mr-2'" @click="doFavourite(recipe)"></i>
+                    <!-- <i v-if="recipe.isFavourite" class="fa fa-heart mr-2" style="color:red" @click="doFavourite(recipe)"></i> -->
+                    <!-- <i v-else class="fa fa-heart mr-2" @click="doFavourite(recipe)"></i> -->
                     <i class="fa fa-edit mr-2" @click="editRecipe(recipe)"></i>
                     <i class="fa fa-trash mr-2" @click="deleteRecipe(recipe)"></i>
                 </td>
@@ -68,5 +69,8 @@ export default {
 }
 .table td i{
     cursor: pointer;
+}
+.icon-color{
+    color: red;
 }
 </style>

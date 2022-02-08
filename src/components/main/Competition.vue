@@ -3,7 +3,7 @@
         <h2>Hello {{name}}!</h2>
         <!-- <pre>
             {{objtoParent}}
-            {{arrtoParent}}
+            {{arrtoParent}} // receiving from search.vue component
         </pre> -->
         <p v-if="getMasterChefStatus">Successfully registered for the Master Chef competition.</p>
         <p v-else>Are you intrested to participate in MasterChef competition!</p>

@@ -38,6 +38,7 @@ export default{
                             if(res.status === 200){
                                 this.$toast.success("Recipe deleted successfully!");
                                 this.$store.dispatch("setRecipesCount"); // need to call the action methods by using dispatch()
+                                this.$store.dispatch("setFavRecipesCount"); // need to call the action methods by using dispatch()
                                 this.getRecipes();
                             }
                         })

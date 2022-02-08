@@ -274,5 +274,19 @@
       "isDeleted": true,
       "id": 306
     }
+  ],
+  "masterChefClasses": [
+    {
+      "id": 401,
+      "title": "Mughlai",
+      "isClassImportant": false,
+      "description": "Learn the traditional mughlai recipes including: Dal Makhani, Makhmali Kofta, Jhatpat Shahi Paneer, Veg Plateau Biryani and Lachcha Pudina Parantha"
+    },
+    {
+      "id": 402,
+      "title": "Indian Steet Food",
+      "isClassImportant": true,
+      "description": "Includes many mouth watering dishes"
+    }
   ]
 }
